@@ -1,0 +1,24 @@
+:- sugar_module(fun).
+:- use_module(org/sugarj/languages/Prolog).
+ 
+:-
+context-free syntax
+	"(" "define-rule" PrologWord "(" PrologVariable+ ")" "(" PrologBody ")" ")" -> PrologNonUnitClause {cons("RuleDef")} 
+	  
+desugarings
+	desugar-ruledef
+ 
+rules
+	desugar-factdef:
+		FactDef(theFact) -> UnitClause(Func(Functor(Word(theFact)),[UnsignedNumber(Nat("100"))]))
+
+	desugar-ruledef:
+	RuleDef(funname, funargs, funbody) ->   NonUnitClause(
+											  Func(
+											    Functor(funname)
+											  , funargs
+											  )
+											, funbody
+											)
+
+. 

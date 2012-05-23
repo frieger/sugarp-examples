@@ -1,0 +1,34 @@
+NonUnitClause(
+  Func(
+    Functor(Word("factorial"))
+  , [Var("X"), Var("Y")]
+  )
+, BodyAnd(
+    BodyGoal(
+      Func(
+        Functor(Word("factorial"))
+      , [ Infix(
+            Var("X")
+          , Op(Symbol("-"))
+          , UnsignedNumber(Nat("1"))
+          )
+        , Var("Z")
+        ]
+      )
+    )
+  , BodyGoal(
+      amb(
+        [ Infix(
+            Assign("Y", Var("X"))
+          , Op(Symbol("*"))
+          , Var("Z")
+          )
+        , Assign(
+            "Y"
+          , Infix(Var("X"), Op(Symbol("*")), Var("Z"))
+          )
+        ]
+      )
+    )
+  )
+)

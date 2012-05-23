@@ -1,0 +1,34 @@
+module prolog/fun
+
+ imports org/sugarj/prolog/init/InitTrans org/sugarj/languages/Prolog
+
+
+signature
+  constructors
+    FactDef : PrologWord() -> PrologUnitClause()
+    RuleDef : PrologWord() * iter() * PrologBody() -> PrologNonUnitClause()
+
+
+strategies
+  desugar =
+    changed-tree(desugar-factdef)
+
+  desugar =
+    changed-tree(desugar-ruledef)
+
+
+rules
+
+  desugar-factdef :
+    FactDef(theFact) -> UnitClause(
+                          Func(
+                            Functor(Word(theFact))
+                          , [UnsignedNumber(Nat("100"))]
+                          )
+                        )
+
+  desugar-ruledef :
+    RuleDef(funname, funargs, funbody) -> NonUnitClause(
+                                            Func(Functor(funname), funargs)
+                                          , funbody
+                                          )
