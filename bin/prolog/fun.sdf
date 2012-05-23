@@ -44,7 +44,6 @@ exports
   (/)
 
   context-free syntax
-    "(" "fact" PrologWord ")"                                                   -> PrologUnitClause    {cons("FactDef")}
     "(" "define-rule" PrologWord "(" PrologVariable+ ")" "(" PrologBody ")" ")" -> PrologNonUnitClause {cons("RuleDef")}
 
   )

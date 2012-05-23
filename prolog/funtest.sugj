@@ -8,7 +8,7 @@ myFact(0, 1).
 	B is A*Z
 ))
 
-:- myFact(5, X), !, print(X). 
+:- myFact(5, X), !, print(X).  
 
 
 (define-rule hi (A) (
